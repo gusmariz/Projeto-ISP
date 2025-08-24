@@ -29,7 +29,7 @@ Para visualizar localmente:
 
 ```bash
 # Clone o repositório
-git clone https://github.com/SEU_USUARIO/Projeto-ISP.git
+git clone https://github.com/gusmariz/Projeto-ISP.git
 
 # Entre na pasta do projeto
 cd Projeto-ISP
