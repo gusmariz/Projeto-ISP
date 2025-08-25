@@ -73,12 +73,12 @@ const Dashboard = () => {
   ];
 
   const monthlyData = [
-    { month: "Mar", custumers: "1765" },
-    { month: "Abr", custumers: "1790" },
-    { month: "Mai", custumers: "1815" },
-    { month: "Jun", custumers: "1840" },
-    { month: "Jul", custumers: "1860" },
-    { month: "Ago", custumers: "1950" },
+    { month: "Mar", custumers: 1765 },
+    { month: "Abr", custumers: 1790 },
+    { month: "Mai", custumers: 1815 },
+    { month: "Jun", custumers: 1840 },
+    { month: "Jul", custumers: 1860 },
+    { month: "Ago", custumers: 1950 },
   ];
 
   return (
@@ -155,6 +155,29 @@ const Dashboard = () => {
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
             Crescimento de Clientes
           </h3>
+          <div className="space-y-4">
+            {monthlyData.map((data, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+              >
+                <span className="font-medium text-gray-900">
+                  {data.month}/2025
+                </span>
+                <div className="flex items-center space-x-4">
+                  <div className="w-32 bg-gray-200 rounded-full h-2">
+                    <div
+                      className="bg-blue-500 h-2 rounded-full"
+                      style={{ width: `${(data.custumers / 3000) * 100}%` }}
+                    ></div>
+                  </div>
+                  <span className="text-sm font-medium text-gray-900 w-16 text-right">
+                    {data.custumers}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
