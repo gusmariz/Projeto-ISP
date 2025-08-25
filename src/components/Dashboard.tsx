@@ -7,78 +7,78 @@ const Dashboard = () => {
     red: { bg: "bg-red-100", text: "text-red-600" },
   };
 
-  const stats = [
+  const estatisticas = [
     {
-      title: "Novos Clientes",
-      value: "90",
-      icon: Users,
-      color: "blue",
+      titulo: "Novos Clientes",
+      valor: "90",
+      icone: Users,
+      cor: "blue",
     },
     {
-      title: "Clientes Ativos",
-      value: "1950",
-      icon: Users,
-      color: "blue",
+      titulo: "Clientes Ativos",
+      valor: "1950",
+      icone: Users,
+      cor: "blue",
     },
     {
-      title: "Plano Mais Vendido",
-      value: "Fibra Família",
-      icon: Wifi,
-      color: "purple",
+      titulo: "Plano Mais Vendido",
+      valor: "Fibra Família",
+      icone: Wifi,
+      cor: "purple",
     },
     {
-      title: "Chamados Abertos",
-      value: "15",
-      icon: AlertTriangle,
-      color: "red",
+      titulo: "Chamados Abertos",
+      valor: "15",
+      icone: AlertTriangle,
+      cor: "red",
     },
   ] as const;
 
-  const recentCustumers = [
+  const clientesRecentes = [
     {
       id: 1,
-      name: "Jorge",
-      plan: "Fibra Família",
+      nome: "Jorge",
+      plano: "Fibra Família",
       status: "Ativo",
-      dueDate: "15/09/2025",
+      dataVencimento: "15/09/2025",
     },
     {
       id: 2,
-      name: "Anderson",
-      plan: "Fibra Premium",
+      nome: "Anderson",
+      plano: "Fibra Premium",
       status: "Pendente",
-      dueDate: "10/08/2025",
+      dataVencimento: "10/08/2025",
     },
     {
       id: 3,
-      name: "Philipe",
-      plan: "Fibra Básico",
+      nome: "Philipe",
+      plano: "Fibra Básico",
       status: "Ativo",
-      dueDate: "20/09/2025",
+      dataVencimento: "20/09/2025",
     },
     {
       id: 4,
-      name: "Gabriel",
-      plan: "Fibra Ultra",
+      nome: "Gabriel",
+      plano: "Fibra Ultra",
       status: "Inativo",
-      dueDate: "05/08/2025",
+      dataVencimento: "05/08/2025",
     },
     {
       id: 5,
-      name: "Victor",
-      plan: "Fibra Família",
+      nome: "Victor",
+      plano: "Fibra Família",
       status: "Ativo",
-      dueDate: "25/08/2025",
+      dataVencimento: "25/08/2025",
     },
   ];
 
-  const monthlyData = [
-    { month: "Mar", custumers: 1765 },
-    { month: "Abr", custumers: 1790 },
-    { month: "Mai", custumers: 1815 },
-    { month: "Jun", custumers: 1840 },
-    { month: "Jul", custumers: 1860 },
-    { month: "Ago", custumers: 1950 },
+  const dadosMensais = [
+    { mes: "Mar", clientes: 1765 },
+    { mes: "Abr", clientes: 1790 },
+    { mes: "Mai", clientes: 1815 },
+    { mes: "Jun", clientes: 1840 },
+    { mes: "Jul", clientes: 1860 },
+    { mes: "Ago", clientes: 1950 },
   ];
 
   return (
@@ -89,9 +89,9 @@ const Dashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, index) => {
-          const Icon = stat.icon;
-          const { bg, text } = colorClasses[stat.color] || {};
+        {estatisticas.map((estatistica, index) => {
+          const Icon = estatistica.icone;
+          const { bg, text } = colorClasses[estatistica.cor] || {};
           return (
             <div
               key={index}
@@ -100,10 +100,10 @@ const Dashboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-600">
-                    {stat.title}
+                    {estatistica.titulo}
                   </p>
                   <p className="text-2xl font-bold text-gray-900 mt-1">
-                    {stat.value}
+                    {estatistica.valor}
                   </p>
                 </div>
                 <div className={`p-3 rounded-lg ${bg}`}>
@@ -121,29 +121,29 @@ const Dashboard = () => {
             Clientes Recentes
           </h3>
           <div className="space-y-4">
-            {recentCustumers.map((custumer) => (
+            {clientesRecentes.map((cliente) => (
               <div
-                key={custumer.id}
+                key={cliente.id}
                 className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
               >
                 <div>
-                  <p className="font-medium text-gray-900">{custumer.name}</p>
-                  <p className="text-sm text-gray-600">{custumer.plan}</p>
+                  <p className="font-medium text-gray-900">{cliente.nome}</p>
+                  <p className="text-sm text-gray-600">{cliente.plano}</p>
                 </div>
                 <div className="text-right">
                   <span
                     className={`px-2 py-1 text-xs font-medium rounded-full ${
-                      custumer.status === "Ativo"
+                      cliente.status === "Ativo"
                         ? "bg-green-100 text-green-800"
-                        : custumer.status === "Pendente"
+                        : cliente.status === "Pendente"
                         ? "bg-yellow-100 text-yellow-800"
                         : "bg-red-100 text-red-800"
                     }`}
                   >
-                    {custumer.status}
+                    {cliente.status}
                   </span>
                   <p className="text-xs text-gray-500 mt-1">
-                    {custumer.dueDate}
+                    {cliente.dataVencimento}
                   </p>
                 </div>
               </div>
@@ -156,23 +156,23 @@ const Dashboard = () => {
             Crescimento de Clientes
           </h3>
           <div className="space-y-4">
-            {monthlyData.map((data, index) => (
+            {dadosMensais.map((dado, index) => (
               <div
                 key={index}
                 className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
               >
                 <span className="font-medium text-gray-900">
-                  {data.month}/2025
+                  {dado.mes}/2025
                 </span>
                 <div className="flex items-center space-x-4">
                   <div className="w-32 bg-gray-200 rounded-full h-2">
                     <div
                       className="bg-blue-500 h-2 rounded-full"
-                      style={{ width: `${(data.custumers / 3000) * 100}%` }}
+                      style={{ width: `${(dado.clientes / 3000) * 100}%` }}
                     ></div>
                   </div>
                   <span className="text-sm font-medium text-gray-900 w-16 text-right">
-                    {data.custumers}
+                    {dado.clientes}
                   </span>
                 </div>
               </div>
