@@ -12,7 +12,7 @@ function App() {
     switch (abaAtiva) {
       case 'dashboard':
         return <Dashboard />;
-      case 'custumers':
+      case 'clientes':
         return <CustumerManagement />;
       default:
         return <Dashboard />;
