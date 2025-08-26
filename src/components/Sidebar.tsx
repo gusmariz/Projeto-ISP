@@ -16,9 +16,9 @@ const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const itensMenu = [
     { id: "dashboard", rotulo: "Dashboard", icone: BarChart3 },
-    { id: "custumers", rotulo: "Clientes", icone: Users },
-    { id: "plans", rotulo: "Planos", icone: Wifi },
-    { id: "support", rotulo: "Suporte", icone: Headphones },
+    { id: "clientes", rotulo: "Clientes", icone: Users },
+    { id: "planos", rotulo: "Planos", icone: Wifi },
+    { id: "suporte", rotulo: "Suporte", icone: Headphones },
   ];
 
   return (
