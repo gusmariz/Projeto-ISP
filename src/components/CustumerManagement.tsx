@@ -201,13 +201,13 @@ const CustumerManagement = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex items-center space-x-2">
-                      <button className="text-blue-600 hover:text-blue-900 p-1 hover:bg-blue-50 rounded">
+                      <button title="vizualizar" type="button" className="text-blue-600 hover:text-blue-900 p-1 hover:bg-blue-50 rounded">
                         <Eye className="w-4 h-4" />
                       </button>
-                      <button className="text-gray-600 hover:text-gray-900 p-1 hover:bg-gray-50 rounded">
+                      <button title="editar" type="button" className="text-gray-600 hover:text-gray-900 p-1 hover:bg-gray-50 rounded">
                         <Edit className="w-4 h-4" />
                       </button>
-                      <button className="text-red-600 hover:text-red-900 p-1 hover:bg-red-50 rounded">
+                      <button title="excluir" type="button" className="text-red-600 hover:text-red-900 p-1 hover:bg-red-50 rounded">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
