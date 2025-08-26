@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./components/Dashboard";
-import CustumerManagement from "./components/custumerManagement";
+import CustumerManagement from "./components/CustumerManagement";
 
 function App() {
   const [abaAtiva, definirAbaAtiva] = useState("dashboard");
