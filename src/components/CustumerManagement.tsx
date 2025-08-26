@@ -16,6 +16,8 @@ const CustumerManagement = () => {
       numero: "11",
       status: "Ativo",
       plano: "Fibra Família",
+      valorMensal: 89.90,
+      dataInstalacao: '15/07/2025',
       vencimento: "15/09/2025",
     },
     {
@@ -28,6 +30,8 @@ const CustumerManagement = () => {
       numero: "22",
       status: "Pendente",
       plano: "Fibra Premium",
+      valorMensal: 129.90,
+      dataInstalacao: '10/07/2025',
       vencimento: "10/08/2025",
     },
     {
@@ -38,7 +42,10 @@ const CustumerManagement = () => {
       cep: "33333-333",
       rua: "Rua Fortaleza",
       numero: "33",
+      status: "Ativo",
       plano: "Fibra Básico",
+      valorMensal: 59.90,
+      dataInstalacao: '20/07/2025',
       vencimento: "20/09/2025",
     },
     {
@@ -49,18 +56,24 @@ const CustumerManagement = () => {
       cep: "44444-444",
       rua: "Rua Manaus",
       numero: "44",
+      status: "Inativo",
       plano: "Fibra Ultra",
+      valorMensal: 179.90,
+      dataInstalacao: '05/07/2025',
       vencimento: "05/08/2025",
     },
     {
       cpf: "555.555.555-55",
       nomeCompleto: "Victor",
       telefone: "(55) 55555-5555",
-      email: "gabriel@gmail.com",
+      email: "victor@gmail.com",
       cep: "55555-555",
       rua: "Rua Porto Alegre",
       numero: "55",
+      status: "Ativo",
       plano: "Fibra Família",
+      valorMensal: 89.90,
+      dataInstalacao: '25/07/2025',
       vencimento: "25/08/2025",
     },
   ];
@@ -70,7 +83,7 @@ const CustumerManagement = () => {
       cliente.nomeCompleto.toLowerCase().includes(busca.toLowerCase()) ||
       cliente.email.toLowerCase().includes(busca.toLowerCase()) ||
       cliente.telefone.includes(busca);
-    const buscaStatus = filtro === "all" || cliente.status === filtro;
+    const buscaStatus = filtro === "todos" || cliente.status === filtro;
     return buscaEncontrada && buscaStatus;
   });
 
@@ -161,6 +174,47 @@ const CustumerManagement = () => {
                 </th>
               </tr>
             </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {clientesFiltrados.map((cliente) => (
+                <tr key={cliente.cpf} className="hover:bg-gray-50 transition-colors">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div>
+                      <div className="text-sm font-medium text-gray-900">{cliente.nomeCompleto}</div>
+                      <div className="text-sm  text-gray-500">{cliente.email}</div>
+                      <div className="text-sm  text-gray-500">{cliente.telefone}</div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">{cliente.plano}</div>
+                    <div className="text-sm text-gray-500">Desde {cliente.dataInstalacao}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${statusCor(cliente.status)}`}>
+                      {cliente.status}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    R$ {cliente.valorMensal.toFixed(2)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {cliente.vencimento}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <div className="flex items-center space-x-2">
+                      <button className="text-blue-600 hover:text-blue-900 p-1 hover:bg-blue-50 rounded">
+                        <Eye className="w-4 h-4" />
+                      </button>
+                      <button className="text-gray-600 hover:text-gray-900 p-1 hover:bg-gray-50 rounded">
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button className="text-red-600 hover:text-red-900 p-1 hover:bg-red-50 rounded">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
