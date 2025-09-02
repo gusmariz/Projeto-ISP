@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import Dashboard from "./components/Dashboard";
 import CustumerManagement from "./components/CustumerManagement";
 import Plans from "./components/Plans";
+import Support from "./components/Support";
 
 function App() {
   const [abaAtiva, definirAbaAtiva] = useState("dashboard");
@@ -17,6 +18,8 @@ function App() {
         return <CustumerManagement />;
       case 'planos':
         return <Plans />;
+      case 'suporte':
+        return <Support />;
       default:
         return <Dashboard />;
     }
