@@ -14,7 +14,7 @@ const Plans = () => {
         "Wifi incluído",
         "Suporte 24/7",
       ],
-      clientes: 450,
+      clientes: 350,
       status: "Ativo",
     },
     {
@@ -47,7 +47,7 @@ const Plans = () => {
         "IP fixo",
         "Antivírus",
       ],
-      clientes: 350,
+      clientes: 450,
       status: "Ativo",
     },
     {
@@ -151,7 +151,9 @@ const Plans = () => {
                 <Edit className="w-4 h-4" />
                 <span>Editar</span>
               </button>
-              <button title="excluir" type="button"
+              <button
+                title="excluir"
+                type="button"
                 className="p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg 
                 transition-colors"
               >
@@ -164,20 +166,57 @@ const Plans = () => {
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900">Comparação de Planos</h3>
+          <h3 className="text-lg font-semibold text-gray-900">
+            Comparação de Planos
+          </h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Plano</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Velocidade</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Preço</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Clientes</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Receita Mensal</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  Plano
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  Velocidade
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  Preço
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  Clientes
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  Receita Mensal
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  Status
+                </th>
               </tr>
             </thead>
+            <tbody className="divide-y divide-gray-200">
+              {planos.map((plano) => (
+                <tr
+                  key={plano.id}
+                  className="hover:bg-gray-50 transition-colors"
+                >
+                  <td className="px-6 py-4 text-gray-900">
+                    <span className="font-medium">{plano.nome}</span>
+                  </td>
+                  <td className="px-6 py-4 text-gray-900">{plano.velocidade}</td>
+                  <td className="px-6 py-4 text-gray-900">R$ {plano.preco.toFixed(2)}</td>
+                  <td className="px-6 py-4 text-gray-900">{plano.clientes}</td>
+                  <td className="px-6 py-4 text-gray-900">
+                    R$ {(plano.preco * plano.clientes).toLocaleString('pt-br', {minimumFractionDigits: 2})}
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded-full">
+                      {plano.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
