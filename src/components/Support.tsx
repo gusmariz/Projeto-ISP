@@ -69,7 +69,8 @@ const Support = () => {
       telefone: "(55) 55555-5555",
       plano: "Fibra Família",
       categoria: "Performance",
-      descricao: "Cliente precisa de suporte técnico para resolver um problema.",
+      descricao:
+        "Cliente precisa de suporte técnico para resolver um problema.",
       data: "03/08/2025",
       status: "Em Progresso",
       prioridade: "Média",
@@ -77,32 +78,98 @@ const Support = () => {
   ];
 
   const estatisticas = [
-    { rotulo: "Tickets Abertos", valor: tickets.filter((t) => t.status === "Aberto").length},
-    { rotulo: "Em Andamento", valor: tickets.filter((t) => t.status === "Em andamento").length},
-    { rotulo: "Resolvidos", valor: tickets.filter((t) => t.status === "Resolvido").length},
-    { rotulo: "Tempo Médio", valor: '2h 15min'},
+    {
+      rotulo: "Tickets Abertos",
+      valor: tickets.filter((t) => t.status === "Aberto").length,
+    },
+    {
+      rotulo: "Em Andamento",
+      valor: tickets.filter((t) => t.status === "Em Progresso").length,
+    },
+    {
+      rotulo: "Resolvidos",
+      valor: tickets.filter((t) => t.status === "Fechado").length,
+    },
+    { rotulo: "Tempo Médio", valor: "2h 15min" },
   ];
 
   const pegarStatusIcone = (status: string) => {
     switch (status) {
-      case "Aberto": return AlertCircle;
-      case "Em Progresso": return Clock;
-      case "Fechado": return CheckCircle;
-      default: return MessageSquare;
+      case "Aberto":
+        return AlertCircle;
+      case "Em Progresso":
+        return Clock;
+      case "Fechado":
+        return CheckCircle;
+      default:
+        return MessageSquare;
     }
   };
 
   const pegarStatusCor = (status: string) => {
     switch (status) {
-      case "Aberto": return 'bg-red-100 text-red-800';
-      case "Em Progresso": return 'bg-yellow-100 text-yellow-800';
-      case "Fechado": return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case "Aberto":
+        return "bg-red-100 text-red-800";
+      case "Em Progresso":
+        return "bg-yellow-100 text-yellow-800";
+      case "Fechado":
+        return "bg-green-100 text-green-800";
+      default:
+        return "bg-gray-100 text-gray-800";
     }
   };
 
-  
-  return <div>Support</div>;
+  const pegarPrioridadeCor = (prioridade: string) => {
+    switch (prioridade) {
+      case "Alta":
+        return "bg-red-100 text-red-800";
+      case "Média":
+        return "bg-yellow-100 text-yellow-800";
+      case "Baixa":
+        return "bg-green-100 text-green-800";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
+
+  const ticketsFiltrados = tickets.filter((ticket) => {
+    const statusIgual =
+      filtroStatus === "todos" || ticket.status === filtroStatus;
+    const prioridadeIgual =
+      filtroPrioridade === "todos" || ticket.prioridade === filtroPrioridade;
+    return statusIgual && prioridadeIgual;
+  });
+
+  return (
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Central de Suporter
+          </h1>
+          <p className="text-gray-600 mt-1">
+            Gerencie todos os chamados e solicitações
+          </p>
+        </div>
+        <button
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center 
+        space-x-2 transition-colors"
+        >
+          <Plus className="w-4 h-4" />
+          <span>Novo Chamado</span>
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {estatisticas.map((estatistica, index) => (
+          <div key={index} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+            <p className="text-sm text-gray-600">{estatistica.rotulo}</p>
+            <p className="text-2xl font-bold text-gray-900 mt-1">{estatistica.valor}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Support;
