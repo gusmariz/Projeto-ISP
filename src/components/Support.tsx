@@ -85,15 +85,15 @@ const Support = () => {
   const estatisticas = [
     {
       rotulo: "Tickets Abertos",
-      valor: tickets.filter((t) => t.status === "Aberto").length,
+      valor: tickets.filter((ticket) => ticket.status === "Aberto").length,
     },
     {
       rotulo: "Em Andamento",
-      valor: tickets.filter((t) => t.status === "Em Progresso").length,
+      valor: tickets.filter((ticket) => ticket.status === "Em andamento").length,
     },
     {
       rotulo: "Resolvidos",
-      valor: tickets.filter((t) => t.status === "Fechado").length,
+      valor: tickets.filter((ticket) => ticket.status === "Resolvido").length,
     },
     { rotulo: "Tempo Médio", valor: "2h 15min" },
   ];
@@ -146,7 +146,7 @@ const Support = () => {
       filtroStatus === "todos" || ticket.status === filtroStatus;
     const prioridadeIgual =
       filtroPrioridade === "todos" || ticket.prioridade === filtroPrioridade;
-    return statusIgual && prioridadeIgual;
+    return buscaEncontrada && statusIgual && prioridadeIgual;
   });
 
   return (
