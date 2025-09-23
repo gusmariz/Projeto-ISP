@@ -2,6 +2,7 @@ import type { Cliente } from "../types";
 
 export const clientes: Cliente[] = [
   {
+    id: 1,
     cpf: "111.111.111-11",
     nomeCompleto: "Jorge",
     telefone: "(11) 11111-1111",
@@ -13,9 +14,11 @@ export const clientes: Cliente[] = [
     plano: "Fibra Família",
     valorMensal: 89.9,
     dataInstalacao: "15/07/2025",
+    ultimoPagamento: "15/08/2025",
     vencimento: "15/09/2025",
   },
   {
+    id: 2,
     cpf: "222.222.222-22",
     nomeCompleto: "Anderson",
     telefone: "(22) 22222-2222",
@@ -27,9 +30,11 @@ export const clientes: Cliente[] = [
     plano: "Fibra Premium",
     valorMensal: 129.9,
     dataInstalacao: "10/07/2025",
+    ultimoPagamento: "10/08/2025",
     vencimento: "10/08/2025",
   },
   {
+    id: 3,
     cpf: "333.333.333-33",
     nomeCompleto: "Philipe",
     telefone: "(33) 33333-3333",
@@ -41,9 +46,11 @@ export const clientes: Cliente[] = [
     plano: "Fibra Básico",
     valorMensal: 59.9,
     dataInstalacao: "20/07/2025",
+    ultimoPagamento: "20/08/2025",
     vencimento: "20/09/2025",
   },
   {
+    id: 4,
     cpf: "444.444.444-44",
     nomeCompleto: "Gabriel",
     telefone: "(44) 44444-4444",
@@ -55,9 +62,11 @@ export const clientes: Cliente[] = [
     plano: "Fibra Ultra",
     valorMensal: 179.9,
     dataInstalacao: "05/07/2025",
+    ultimoPagamento: "05/08/2025",
     vencimento: "05/08/2025",
   },
   {
+    id: 5,
     cpf: "555.555.555-55",
     nomeCompleto: "Victor",
     telefone: "(55) 55555-5555",
@@ -69,6 +78,7 @@ export const clientes: Cliente[] = [
     plano: "Fibra Família",
     valorMensal: 89.9,
     dataInstalacao: "25/07/2025",
+    ultimoPagamento: "25/08/2025",
     vencimento: "25/08/2025",
   },
 ];
