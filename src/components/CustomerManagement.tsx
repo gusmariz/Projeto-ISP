@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { Plus, Search, Edit, Trash2, Eye, Filter } from "lucide-react";
-import { clientes } from "../data/custumers";
+import { clientes } from "../data/customers";
 
-const CustumerManagement = () => {
+interface CustomerManagementProps {
+  onSelecionarCliente: (id: number) => void;
+}
+
+const CustumerManagement: React.FC<CustomerManagementProps> = ({
+  onSelecionarCliente,
+}) => {
   const [busca, definirBusca] = useState("");
   const [filtro, setFiltro] = useState("todos");
 
@@ -104,20 +110,35 @@ const CustumerManagement = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {clientesFiltrados.map((cliente) => (
-                <tr key={cliente.cpf} className="hover:bg-gray-50 transition-colors">
+                <tr
+                  key={cliente.id}
+                  className="hover:bg-gray-50 transition-colors"
+                >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div>
-                      <div className="text-sm font-medium text-gray-900">{cliente.nomeCompleto}</div>
-                      <div className="text-sm  text-gray-500">{cliente.email}</div>
-                      <div className="text-sm  text-gray-500">{cliente.telefone}</div>
+                      <div className="text-sm font-medium text-gray-900">
+                        {cliente.nomeCompleto}
+                      </div>
+                      <div className="text-sm  text-gray-500">
+                        {cliente.email}
+                      </div>
+                      <div className="text-sm  text-gray-500">
+                        {cliente.telefone}
+                      </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900">{cliente.plano}</div>
-                    <div className="text-sm text-gray-500">Desde {cliente.dataInstalacao}</div>
+                    <div className="text-sm text-gray-500">
+                      Desde {cliente.dataInstalacao}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${statusCor(cliente.status)}`}>
+                    <span
+                      className={`px-2 py-1 text-xs font-medium rounded-full ${statusCor(
+                        cliente.status
+                      )}`}
+                    >
                       {cliente.status}
                     </span>
                   </td>
@@ -129,13 +150,30 @@ const CustumerManagement = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex items-center space-x-2">
-                      <button title="vizualizar" type="button" className="text-blue-600 hover:text-blue-900 p-1 hover:bg-blue-50 rounded">
-                        <Eye className="w-4 h-4" />
+                      <button
+                        title="vizualizar"
+                        type="button"
+                        className="text-blue-600 hover:text-blue-900 p-1 hover:bg-blue-50 rounded"
+                      >
+                        <Eye
+                          className="w-4 h-4"
+                          onClick={() => {
+                            onSelecionarCliente(cliente.id);
+                          }}
+                        />
                       </button>
-                      <button title="editar" type="button" className="text-gray-600 hover:text-gray-900 p-1 hover:bg-gray-50 rounded">
+                      <button
+                        title="editar"
+                        type="button"
+                        className="text-gray-600 hover:text-gray-900 p-1 hover:bg-gray-50 rounded"
+                      >
                         <Edit className="w-4 h-4" />
                       </button>
-                      <button title="excluir" type="button" className="text-red-600 hover:text-red-900 p-1 hover:bg-red-50 rounded">
+                      <button
+                        title="excluir"
+                        type="button"
+                        className="text-red-600 hover:text-red-900 p-1 hover:bg-red-50 rounded"
+                      >
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
