@@ -1,4 +1,5 @@
 export interface Cliente {
+  id: number;
   cpf: string;
   nomeCompleto: string;
   telefone: string;
@@ -10,6 +11,7 @@ export interface Cliente {
   plano: string;
   valorMensal: number;
   dataInstalacao: string;
+  ultimoPagamento: string;
   vencimento: string;
 }
 
