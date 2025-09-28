@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Plus, Search, Edit, Trash2, Eye, Filter } from "lucide-react";
-import { clientes } from "../data/customers";
+import { getClientes } from '../services/api'; // Importa a função da API
+import type { Cliente } from "../types";
 
 interface CustomerManagementProps {
   onSelecionarCliente: (id: number) => void;
@@ -9,15 +10,39 @@ interface CustomerManagementProps {
 const CustumerManagement: React.FC<CustomerManagementProps> = ({
   onSelecionarCliente,
 }) => {
+  // Estados para guardar os dados, o carregamento e possíveis erros
+  const [clientes, setClientes] = useState<Cliente[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   const [busca, definirBusca] = useState("");
   const [filtro, setFiltro] = useState("todos");
+
+  // Hook para buscar os dados quando o componente carregar
+  useEffect(() => {
+    const carregarClientes = async () => {
+      try {
+        setLoading(true);
+        const data = await getClientes();
+        setClientes(data);
+        setError(null);
+      } catch (err) {
+        setError("Falha ao carregar os clientes.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    carregarClientes();
+  }, []); // O array vazio [] faz com que isso execute apenas uma vez
 
   const clientesFiltrados = clientes.filter((cliente) => {
     const buscaEncontrada =
       cliente.nomeCompleto.toLowerCase().includes(busca.toLowerCase()) ||
       cliente.email.toLowerCase().includes(busca.toLowerCase()) ||
       cliente.telefone.includes(busca);
-    const buscaStatus = filtro === "todos" || cliente.status === filtro;
+    const statusFormatado = cliente.status.charAt(0).toUpperCase() + cliente.status.slice(1);
+    const buscaStatus = filtro === "todos" || statusFormatado === filtro;
     return buscaEncontrada && buscaStatus;
   });
 
@@ -33,6 +58,14 @@ const CustumerManagement: React.FC<CustomerManagementProps> = ({
         return "bg-gray-100 bg-gray-800";
     }
   };
+
+  if (loading) {
+    return <div className="p-4 text-center">Carregando clientes...</div>;
+  }
+
+  if (error) {
+    return <div className="p-4 text-center text-red-500">{error}</div>;
+  }
 
   return (
     <div className="space-y-6">
@@ -98,9 +131,6 @@ const CustumerManagement: React.FC<CustomerManagementProps> = ({
                   Status
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Valor Mensal
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Vencimento
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -129,9 +159,6 @@ const CustumerManagement: React.FC<CustomerManagementProps> = ({
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900">{cliente.plano}</div>
-                    <div className="text-sm text-gray-500">
-                      Desde {cliente.dataInstalacao}
-                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span
@@ -143,9 +170,6 @@ const CustumerManagement: React.FC<CustomerManagementProps> = ({
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    R$ {cliente.valorMensal.toFixed(2)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {cliente.vencimento}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -154,12 +178,10 @@ const CustumerManagement: React.FC<CustomerManagementProps> = ({
                         title="vizualizar"
                         type="button"
                         className="text-blue-600 hover:text-blue-900 p-1 hover:bg-blue-50 rounded"
+                         onClick={() => onSelecionarCliente(cliente.id)}
                       >
                         <Eye
                           className="w-4 h-4"
-                          onClick={() => {
-                            onSelecionarCliente(cliente.id);
-                          }}
                         />
                       </button>
                       <button
